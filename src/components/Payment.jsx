@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 
 function Payment() {
 
-    const [phone,setPhone] =useState("")
+    let initial = {
+        evcplus : false,
+        sahal : false,
+        zaad : false
+    }
+
+    const [phone,setPhone] =useState("");
+    const [payment , setPayment] = useState(initial)
 
 
   return (
@@ -11,20 +18,21 @@ function Payment() {
 
     <div className="payment-cards">
         <div
-            className="payment-card">
+            className={`payment-card ${payment.zaad && 'selected'}`} onClick={()=> setPayment({...Payment, zaad:true})}>
             <h3>Zaad Service</h3>
         </div>
         <div
-            className="payment-card">
+            className={`payment-card ${payment.sahal && 'selected'}`} onClick={()=> setPayment({...Payment, sahal:true})}>
             <h3>Sahal Service</h3>
         </div>
         <div
-            className="payment-card">
+            className={`payment-card ${payment.evcplus && 'selected'}`} onClick={()=> setPayment({...Payment, evcplus : true})}>
             <h3>Evc Plus</h3>
         </div>
         <form >
             <input
                 className="form-control"
+                type="number"
                 placeholder="2526......"
                 onChange={(e) => setPhone(e.target.value)}
             />
